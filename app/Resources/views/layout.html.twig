@@ -39,7 +39,7 @@
           <div class="card blue-grey darken-1">
             <div class="card-content white-text">
               <span class="card-title">Les annonces</span>
-              <p>Retrouvez toute les derneire annonce ou ajoutez simplement la votre.</p>
+              <p>Retrouvez toute les dernieres annonces ou ajoutez simplement la votre.</p>
             </div>
             <div class="card-action">
               <a href="{{ path('cb_platform_home') }}">Accueil</a>
@@ -51,15 +51,6 @@
 
 <hr>
 
-    <!-- <div class="row">
-      <div id="menu" class="col-md-3">
-        <h3>Les annonces</h3>
-        <ul class="nav nav-pills nav-stacked">
-          <li><a href="{{ path('cb_platform_home') }}">Accueil</a></li>
-          <br>
-          <li><a href="{{ path('cb_platform_add') }}">Ajouter une annonce</a></li>
-        </ul> -->
-
         <h4>Dernière annonces</h4>
         {{ render(controller("CBPlatformBundle:Advert:menu", {'limit': 3})) }}
       </div>
@@ -68,6 +59,8 @@
         {% endblock %}
       </div>
     </div>
+
+
 
     <hr>
 
