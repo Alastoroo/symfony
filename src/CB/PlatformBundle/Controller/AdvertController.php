@@ -72,6 +72,14 @@ class AdvertController extends Controller
 
   public function addAction(Request $request)
   {
+    // On récupere le service
+    $antispam = $this->container->get('cb_platform.antispam');
+    // Je pars du principe que $text contient le texte d'un message quelconque
+    $text = '...';
+    if ($antispam->isSpam($text)){
+      throw new \Exception('Votre message à été détecté comme spam. Utilisez plus de 50 caractères');
+    }
+
     if ($request->isMethod('POST')){
       $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
       return $this->redirectToRoute('cb_platform_view', array('id' => 5));
