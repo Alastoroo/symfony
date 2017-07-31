@@ -34,18 +34,21 @@ class AdvertController extends Controller
         'id'      => 1,
         'author'  => 'Alexandre',
         'content' => 'Nous recherchons un dev Symfony débutant syr Lyon',
+        'image'   => "https://symfony.com/logos/symfony_black_02.png",
         'date'    => new \Datetime()),
       array(
         'title'   => 'Mission de Webmaster',
         'id'      => 2,
         'author'  => 'Hugo',
         'content' => 'Nous recherchon un Webmaster capable de maintenir notre site internet',
+        'image'   => "https://upload.wikimedia.org/wikipedia/commons/4/4d/Webmaster_logo_adopted_copy.png",
         'date'    => new \Datetime()),
       array(
         'title'   => 'Offre de stage Webdesigner',
         'id'      => 3,
         'author'  => 'Colin',
         'content' => 'Nous proposons un post de Webdesigner',
+        'image'   => "https://www.creatypics.com/css/images/logo_index.png",
         'date'    => new \Datetime())
     );
     return $this->render('CBPlatformBundle:Advert:index.html.twig', array(
