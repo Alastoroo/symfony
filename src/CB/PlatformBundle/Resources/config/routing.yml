@@ -1,0 +1,41 @@
+# src/CB/PlateformBundle/Resource/routing.yml
+
+#mapping des routes
+
+cb_platform_home: #nom de la route
+    path:       /{page} # URL
+    defaults:
+        _controller: CBPlatformBundle:Advert:index # le controller qu'on appel (defaults peux contenir d'autre parametre)
+        page:    1
+    requirements:
+        page: \d*
+
+
+cb_platform_view:
+    path:       /advert/{id}
+    defaults:
+        _controller: CBPlatformBundle:Advert:view
+    requirements:
+        id: \d+
+
+
+cb_platform_add:
+    path:       /add
+    defaults:
+        _controller: CBPlatformBundle:Advert:add
+
+
+cb_platform_edit:
+    path:       /edit/{id}
+    defaults:
+        _controller: CBPlatformBundle:Advert:edit
+    requirements:
+        id: \d+
+
+
+cb_platform_delete:
+    path:       /delete/{id}
+    defaults:
+        _controller: CBPlatformBundle:Advert:delete
+    requirements:
+        id: \d+

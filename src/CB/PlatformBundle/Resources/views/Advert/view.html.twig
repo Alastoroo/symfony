@@ -1,0 +1,25 @@
+{% extends 'CBPlatformBundle::layout.html.twig' %}
+
+{% block title %}
+  Lecture d'une annonce - {{ parent() }}
+{% endblock %}
+
+{% block cbplatform_body %}
+  <h2>{{ advert.title }}</h2>
+  <i>Par {{ advert.author }}, le {{ advert.date|date('d/m/Y') }}</i>
+  <div class="well">
+    {{ advert.content }}
+  </div>
+
+  <p>
+    <a href="{{ path('cb_platform_home') }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-chevron-left">Retour à la liste</i>
+    </a>
+    <a href="{{ path('cb_platform_edit', {'id': advert.id}) }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-edit">Modifier l'annonce</i>
+    </a>
+    <a href="{{ path('cb_platform_delete', {'id': advert.id}) }}" class="btn btn-danger">
+      <i class="glyphicon glyphicon-trash">Supprimer l'annonce</i>
+    </a>
+  </p>
+{% endblock %}
