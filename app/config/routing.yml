@@ -1,3 +1,6 @@
+cb_commerce:
+    resource: "@CBCommerceBundle/Resources/config/routing.yml"
+    prefix:   /commerce
 
 cb_platform:
     resource: "@CBPlatformBundle/Resources/config/routing.yml"

@@ -1,0 +1,4 @@
+services:
+#    cb_commerce.example:
+#        class: CB\CommerceBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

@@ -1,0 +1,14 @@
+cb_commerce_home:
+    path:     /{page}
+    defaults:
+        _controller: CBCommerceBundle:Commerce:index
+        page:    1
+    requirements:
+        page: \d*
+
+cb_commerce_listAnnonce:
+    path:    /listAnnonce
+    defaults:
+        _controller: CBCommerceBundle:Commerce:index
+    requirements:
+        id: \d+
