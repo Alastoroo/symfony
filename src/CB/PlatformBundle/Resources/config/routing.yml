@@ -39,3 +39,8 @@ cb_platform_delete:
         _controller: CBPlatformBundle:Advert:delete
     requirements:
         id: \d+
+
+cb_plateform_commerce:
+    path:       /commerce
+    defaults:
+        _controller: CBPlatformBundle:Commerce:commerce
