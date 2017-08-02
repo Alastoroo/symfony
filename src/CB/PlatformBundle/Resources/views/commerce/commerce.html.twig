@@ -1,1 +1,24 @@
-CECI EST UN TESTE DU COMMERCE 
+
+<h1>Bievenu dans section annonce commerce</h1>
+<!-- On ajoute une boucle pour afficher les element card des annonce de commerce -->
+{% for commerce in listCommerce %}
+<div class="col s12 m7">
+  <div class="card horizontal">
+    <div class="card-image">
+      <img src="{{ asset(commerce.image) }}" alt="">
+      <!-- <img src="https://lorempixel.com/100/190/nature/6"> -->
+    </div>
+    <div class="card-stacked">
+      <div class="card-content">
+        <p>{{ commerce.content }}</p>
+      </div>
+      <div class="card-action">
+        <li>
+          <a href="{{ path('cb_platform_view', {'id': commerce.id}) }}">{{ commerce.title }}</a>
+
+        </li>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
