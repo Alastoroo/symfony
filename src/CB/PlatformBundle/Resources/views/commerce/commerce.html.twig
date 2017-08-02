@@ -1,11 +1,17 @@
+{% extends '::layout.html.twig' %}
 
+{% block stylesheets %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
+{% endblock %}
+
+{% block name %}
 <h1>Bievenu dans section annonce commerce</h1>
 <!-- On ajoute une boucle pour afficher les element card des annonce de commerce -->
 {% for commerce in listCommerce %}
 <div class="col s12 m7">
   <div class="card horizontal">
     <div class="card-image">
-      <img src="{{ asset(commerce.image) }}" alt="">
+      <img src="{{ asset(commerce.image) }}" width="100" height="100" alt="">
       <!-- <img src="https://lorempixel.com/100/190/nature/6"> -->
     </div>
     <div class="card-stacked">
@@ -15,10 +21,11 @@
       <div class="card-action">
         <li>
           <a href="{{ path('cb_platform_view', {'id': commerce.id}) }}">{{ commerce.title }}</a>
-
+          <p>{{ commerce.price }}Euros</p>
         </li>
       </div>
     </div>
   </div>
 </div>
 {% endfor %}
+{% endblock %}
