@@ -40,7 +40,13 @@ cb_platform_delete:
     requirements:
         id: \d+
 
+# ajout des route commerce pour la partie commerce du site
 cb_plateform_commerce:
     path:       /commerce
     defaults:
         _controller: CBPlatformBundle:Commerce:commerce
+
+cb_plateform_commerce_add:
+    path:       /addcommerce
+    defaults:
+        _controller: CBPlatformBundle:Commerce:addcommerce

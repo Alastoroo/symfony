@@ -51,14 +51,36 @@ class CommerceController extends Controller
       return $this->render('CBPlatformBundle:Commerce:commerce.html.twig', array(
         'listCommerce' => $listCommerce
       ));
-    // $commerce = $this->get('templating')->render('CBPlatformBundle:Commerce:commerce.html.twig');
-    // return new Response($commerce);
+
   }
+  //controller pour afficher le layuout dans commerce
   public function layoutAction()
   {
      $layout = $this->get('templating')->render('app:Ressources:views:layout.html.twig');
      return new Response($layout);
   }
+// Controller pour ajouter une annonce commerce
+  public function addcommerceAction()
+  {
+    $add = $this->get('templating')->render('CBPlatformBundle:Commerce:addcommerce.html.twig');
+    return new Response($add);
+  }
+  // ANTISPAM utlisation du service (à activer)
+  //   // On récupere le service
+  //   $antispam = $this->container->get('cb_platform.antispam');
+  //   // Je pars du principe que $text contient le texte d'un message quelconque
+  //   $text = '...';
+  //   if ($antispam->isSpam($text)){
+  //     throw new \Exception('Votre message à été détecté comme spam. Utilisez plus de 50 caractères');
+  //   }
+  //
+  //   if ($request->isMethod('POST')){
+  //     $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
+  //     return $this->redirectToRoute('cb_platform_view', array('id' => 5));
+  //   }
+  //   return $this->render('CBPlatformBundle:Advert:edit.html.twig');
+  // }
 }
+
 
  ?>

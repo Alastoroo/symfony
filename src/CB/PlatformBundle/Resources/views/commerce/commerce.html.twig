@@ -1,31 +1,33 @@
+{# Page commerce /CB/PlateformBundle/Ressources/views/commerce/commerce.html.twig #}
 {% extends '::layout.html.twig' %}
 
-{% block stylesheets %}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
-{% endblock %}
 
 {% block name %}
-<h1>Bievenu dans section annonce commerce</h1>
+<h1>Bievenu dans section annonces commerce</h1>
 <!-- On ajoute une boucle pour afficher les element card des annonce de commerce -->
 {% for commerce in listCommerce %}
-<div class="col s12 m7">
-  <div class="card horizontal">
-    <div class="card-image">
-      <img src="{{ asset(commerce.image) }}" width="100" height="100" alt="">
-      <!-- <img src="https://lorempixel.com/100/190/nature/6"> -->
-    </div>
-    <div class="card-stacked">
-      <div class="card-content">
-        <p>{{ commerce.content }}</p>
+<!-- <div class="row"> -->
+ <div class="container">
+    <div class="col s4">
+      <div class="card horizontal">
+        <div class="card-image">
+          <img src="{{ asset(commerce.image) }}" width="100" height="100" alt="">
+          <a class="btn btn-floating btn-large red pulse" width="100" height="100"><i>{{ commerce.price }}€</i><p></p></a>
+          <!-- <img src="https://lorempixel.com/100/190/nature/6"> -->
+        </div>
+        <div class="card-stacked">
+          <div class="card-content">
+            <p>{{ commerce.content }}</p>
+          </div>
+          <div class="card-action">
+            <li>
+              <a href="{{ path('cb_platform_view', {'id': commerce.id}) }}">{{ commerce.title }}</a>
+            </li>
+          </div>
+        </div>
       </div>
-      <div class="card-action">
-        <li>
-          <a href="{{ path('cb_platform_view', {'id': commerce.id}) }}">{{ commerce.title }}</a>
-          <p>{{ commerce.price }}Euros</p>
-        </li>
-      </div>
     </div>
-  </div>
-</div>
+   </div>
+<!-- </div> -->
 {% endfor %}
 {% endblock %}
