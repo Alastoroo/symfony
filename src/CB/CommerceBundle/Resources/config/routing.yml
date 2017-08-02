@@ -10,5 +10,3 @@ cb_commerce_listAnnonce:
     path:    /listAnnonce
     defaults:
         _controller: CBCommerceBundle:Commerce:index
-    requirements:
-        id: \d+
