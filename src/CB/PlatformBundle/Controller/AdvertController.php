@@ -9,6 +9,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 //use Symfony\Component\NotFoundHttpExeption;
 
+//creation d'un entité (un objet )avec doctrine2
+use OC\PlatfomBundle\Entity\Advert
+
 
 
 
@@ -56,36 +59,37 @@ class AdvertController extends Controller
   ));
   }
 
-  public function viewAction($id)
+
+// ANONCE VIEW ENTITY
+  public function viewAction()
   {
-    $advert = array(
-      'title'     => 'Recherche développeur Symfony2',
-      'id'        => $id,
-      'author'    => 'Alexandre',
-      'content'   => 'Nous recherchons un dev Symfony2 débutant sur Lyon',
-      'date'      => new \Datetime()
-    );
+    //annonce
+    $advert = new Advert;
+    $advert->setContent("Recherche dév Symfony3.");
+
     return $this->render('CBPlatformBundle:Advert:view.html.twig', array(
       'advert' => $advert
     ));
   }
 
-  // public function addAction(Request $request)
-  // {
-  //   // On récupere le service
-  //   $antispam = $this->container->get('cb_platform.antispam');
-  //   // Je pars du principe que $text contient le texte d'un message quelconque
-  //   $text = '...';
-  //   if ($antispam->isSpam($text)){
-  //     throw new \Exception('Votre message à été détecté comme spam. Utilisez plus de 50 caractères');
-  //   }
-  //
-  //   if ($request->isMethod('POST')){
-  //     $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
-  //     return $this->redirectToRoute('cb_platform_view', array('id' => 5));
-  //   }
-  //   return $this->render('CBPlatformBundle:Advert:edit.html.twig');
-  // }
+
+
+  public function addAction(Request $request)
+  {
+    // On récupere le service
+    $antispam = $this->container->get('cb_platform.antispam');
+    // Je pars du principe que $text contient le texte d'un message quelconque
+    $text = '...';
+    if ($antispam->isSpam($text)){
+      throw new \Exception('Votre message à été détecté comme spam. Utilisez plus de 50 caractères');
+    }
+
+    if ($request->isMethod('POST')){
+      $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
+      return $this->redirectToRoute('cb_platform_view', array('id' => 5));
+    }
+    return $this->render('CBPlatformBundle:Advert:edit.html.twig');
+  }
 
   public function deleteAction($id)
   {
