@@ -3,14 +3,15 @@
 
 //on se place dans le namesapce des controleur de notre bundle
 namespace CB\PlatformBundle\Controller;
+
+use CB\PlatformBundle\Entity\Advert;
 //Notre controller va utiliser l'objet Response, on va donc le defnir avec le "use"
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-//use Symfony\Component\NotFoundHttpExeption;
+// use Symfony\Component\HttpFoundation\Response;
+// use Symfony\Component\NotFoundHttpExeption;
 
-//creation d'un entité (un objet )avec doctrine2
-use OC\PlatfomBundle\Entity\Advert
+
 
 
 
@@ -61,35 +62,56 @@ class AdvertController extends Controller
 
 
 // ANONCE VIEW ENTITY
-  public function viewAction()
+  public function viewAction($id)
   {
-    //annonce
-    $advert = new Advert;
-    $advert->setContent("Recherche dév Symfony3.");
+    $repository = $this->getDoctrine()
+      ->getManager()
+      ->getRepository('CBPlatformBundle:Advert')
+  ;
+    $advert = $repository->find($id);
 
+    if (null === $advert){
+      throw new NotFoundHttpException("L'annonce d'id " .$id. " n'existe pas. ");
+    }
     return $this->render('CBPlatformBundle:Advert:view.html.twig', array(
       'advert' => $advert
     ));
   }
 
 
-
+// ADD ACTION (BDD)
   public function addAction(Request $request)
   {
-    // On récupere le service
-    $antispam = $this->container->get('cb_platform.antispam');
-    // Je pars du principe que $text contient le texte d'un message quelconque
-    $text = '...';
-    if ($antispam->isSpam($text)){
-      throw new \Exception('Votre message à été détecté comme spam. Utilisez plus de 50 caractères');
-    }
+    //Création de l'entité
+    $advert = new Advert();
+    $advert->setCreatedAt(new \DateTime());
+    $advert->setUpdateAt(new \DateTime());
+    $advert->setTitle('Recherche dev symfony.');
+    $advert->setAuthor('Alexandre');
+    $advert->setContent('Nous recherchons un dev symfony débutant sur Lyon. blablabla');
+    //On peut ne pas définir ni la date ni la publication
+    // car ces attributs sont défini automatiquement dans le contructeur
 
-    if ($request->isMethod('POST')){
-      $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
-      return $this->redirectToRoute('cb_platform_view', array('id' => 5));
+    //on récupere l'entitiManager
+    $em = $this->getDoctrine()->getManager();
+
+    //etape 1: On << persiste >> l'entité
+    $em->persist($advert);
+
+    //etape 2: On << flush >> tout ce qui est persisté avant
+    $em->flush();
+
+    //reste de la méthode
+    if ($request->isMethod('POST')) {
+      $_request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
+      //On redirige vers la page de visualisation de l'annonce
+      return $this->redirectToRoute('cb_platform_view', array('id' => $advert->getId()));
     }
-    return $this->render('CBPlatformBundle:Advert:edit.html.twig');
+    //Si on n'est pas en POST, alors on affiche le formulaire
+    return $this->render('CBPlatformBundle:Advert:add.html.twig', array('advert' => $advert));
   }
+
+
 
   public function deleteAction($id)
   {
